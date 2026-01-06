@@ -7,10 +7,11 @@ export const authOptions = {
   providers: [
     // Only add Google provider if credentials are configured
     ...(process.env.GOOGLE_CLIENT_ID && 
-        process.env.GOOGLE_CLIENT_ID !== 'your-google-client-id-from-console' ? [
+        process.env.GOOGLE_CLIENT_ID !== 'your-google-client-id-from-console' &&
+        process.env.GOOGLE_CLIENT_ID.startsWith('') ? [
       GoogleProvider({
         clientId: process.env.GOOGLE_CLIENT_ID,
-        clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+        clientSecret: process.env.GOOGLE_CLIENT_SECRET || '',
       })
     ] : []),
     CredentialsProvider({
